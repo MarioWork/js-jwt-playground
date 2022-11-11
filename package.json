@@ -1,0 +1,20 @@
+{
+  "name": "js-jwt-playground",
+  "version": "1.0.0",
+  "description": "simple project to play around with jwt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarioWork/js-jwt-playground.git"
+  },
+  "author": "Mario Vieira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MarioWork/js-jwt-playground/issues"
+  },
+  "homepage": "https://github.com/MarioWork/js-jwt-playground#readme"
+}
