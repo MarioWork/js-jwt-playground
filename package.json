@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/MarioWork/js-jwt-playground/issues"
   },
-  "homepage": "https://github.com/MarioWork/js-jwt-playground#readme"
+  "homepage": "https://github.com/MarioWork/js-jwt-playground#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1"
+  }
 }
