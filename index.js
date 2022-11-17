@@ -29,6 +29,11 @@ const authenticateToken = (req, res, next) => {
     });
 }
 
+const generateAccessToken = (user) =>
+    jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s' });
+
+const generateRefreshAccessToken = (user) => jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+
 server.get('/posts', authenticateToken, (req, res) => {
     res.json(posts.filter(({ username }) => username === req.user.name));
 });
@@ -41,8 +46,9 @@ server.post('/login', (req, res) => {
 
     const user = { name: username };
 
-    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-    res.json({ accessToken });
+    const accessToken = generateAccessToken(user);
+    const refreshToken = generateRefreshAccessToken(user);
+    res.json({ accessToken, refreshToken });
 });
 
 
