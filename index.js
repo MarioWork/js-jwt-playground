@@ -5,6 +5,9 @@ const server = express();
 
 server.use(express.json())
 
+//Should be stored in a database
+let refreshTokens = [];
+
 const posts = [
     {
         username: 'Kyle',
@@ -48,7 +51,26 @@ server.post('/login', (req, res) => {
 
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshAccessToken(user);
+
+    refreshTokens.push(refreshToken);
+
     res.json({ accessToken, refreshToken });
+});
+
+server.post('/refresh', (req, res) => {
+    const refreshToken = req.body.token;
+
+    if (refreshToken == null) return res.sendStatus(401);
+
+    if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403);
+
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+
+        const accessToken = generateAccessToken({ name: user.name });
+
+        res.json({ accessToken });
+    })
 });
 
 
