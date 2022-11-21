@@ -1,12 +1,10 @@
 require('dotenv').config()
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const server = express();
 
 server.use(express.json())
 
-//Should be stored in a database
-let refreshTokens = [];
+
 
 const posts = [
     {
@@ -32,29 +30,11 @@ const authenticateToken = (req, res, next) => {
     });
 }
 
-const generateAccessToken = (user) =>
-    jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s' });
+server.use('/login', require('./routes/login'));
 
-const generateRefreshAccessToken = (user) => jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
 
-server.get('/posts', authenticateToken, (req, res) => {
+/* server.get('/posts', authenticateToken, (req, res) => {
     res.json(posts.filter(({ username }) => username === req.user.name));
-});
-
-server.post('/login', (req, res) => {
-    //Authenticate User
-
-    //Serialize user
-    const username = req.body.username;
-
-    const user = { name: username };
-
-    const accessToken = generateAccessToken(user);
-    const refreshToken = generateRefreshAccessToken(user);
-
-    refreshTokens.push(refreshToken);
-
-    res.json({ accessToken, refreshToken });
 });
 
 server.post('/refresh', (req, res) => {
@@ -71,7 +51,7 @@ server.post('/refresh', (req, res) => {
 
         res.json({ accessToken });
     })
-});
+}); */
 
 
 server.listen(3000);
