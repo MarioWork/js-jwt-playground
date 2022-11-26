@@ -1,14 +1,10 @@
 require('dotenv').config();
-const jwt = require('jsonwebtoken');
 
 //Should be stored in a database
 let refreshTokens = [];
 
-const generateAccessToken = (user) =>
-    jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s' });
-
-const generateRefreshAccessToken = (user) => jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-
+const { generateAccessToken } = require('../utils/generate-access-token');
+const { generateRefreshAccessToken } = require('../utils/generate-refresh-access-token');
 
 const handleLogin = (req, res) => {
     //Authenticate User
