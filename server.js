@@ -4,17 +4,13 @@ const server = express();
 
 server.use(express.json());
 
+server.use('/login', require('./routes/auth/login'));
+server.use('/posts', require('./routes/posts/get'));
 
 
 
-server.use('/login', require('./routes/login'));
 
-
-/* server.get('/posts', authenticateToken, (req, res) => {
-    res.json(posts.filter(({ username }) => username === req.user.name));
-});
-
-server.post('/refresh', (req, res) => {
+/* server.post('/refresh', (req, res) => {
     const refreshToken = req.body.token;
 
     if (refreshToken == null) return res.sendStatus(401);
