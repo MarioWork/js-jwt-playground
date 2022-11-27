@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const authenticateToken = require('../../utils/authenticate-token');
+const authenticateToken = require('../../middleware/authenticate-token');
 const postsController = require('../../controllers/posts-controller');
 
 router.get('/', authenticateToken, postsController.getPostsByUsername);
