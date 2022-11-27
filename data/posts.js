@@ -9,7 +9,7 @@ const posts = [
     },
 ];
 
-module.posts = posts;
+module.exports = posts;
 
 
 
