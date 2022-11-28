@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const refreshTokens = require('../../data/refresh-tokens');
+const { refreshTokens, addToken } = require('../../data/refresh-tokens');
 
 const generateAccessToken = require('../../utils/generate-access-token');
 const generateRefreshAccessToken = require('../../utils/generate-refresh-access-token');
@@ -16,10 +16,10 @@ const handleLogin = (req, res) => {
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshAccessToken(user);
 
-    refreshTokens.push(refreshToken);
+    addToken(refreshToken);
 
     res.json({ accessToken, refreshToken });
-
+    console.log(refreshTokens);
 }
 
 module.exports = { handleLogin };

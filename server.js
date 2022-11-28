@@ -6,7 +6,7 @@ server.use(express.json());
 
 server.use('/login', require('./routes/auth/login'));
 server.use('/refresh', require('./routes/auth/refresh'));
-server.use('/posts', require('./routes/posts/get'));
+server.use('/posts', require('./routes/posts/get-by-username'));
 
 
 
