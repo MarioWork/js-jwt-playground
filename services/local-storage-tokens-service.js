@@ -3,19 +3,32 @@ const fs = require('fs');
 const FILE_PATH = './services/refresh-tokens.json';
 
 const saveRefreshToken = (refreshToken) => {
-    const fileObj = readRefreshTokens();
+    const refreshTokens = readRefreshTokens();
 
-    fileObj.tokens.push(refreshToken);
+    refreshTokens.push(refreshToken);
 
-    fs.writeFile(FILE_PATH, JSON.stringify(fileObj), (_, err) => {
+    saveFile({ tokens: refreshTokens });
+}
+
+const readRefreshTokens = () => {
+    return JSON.parse(fs.readFileSync(FILE_PATH, 'utf-8')).tokens;
+}
+
+const removeRefreshToken = (refreshToken) => {
+    const refreshTokens = readRefreshTokens();
+
+    newRefreshTokensArray = refreshTokens.filter((token) => token != refreshToken);
+
+    saveFile({ tokens: newRefreshTokensArray });
+}
+
+
+const saveFile = (obj) => {
+    fs.writeFile(FILE_PATH, JSON.stringify(obj), (_, err) => {
         if (err) {
             console.log(err);
         }
     });
 }
 
-const readRefreshTokens = () => {
-    return JSON.parse(fs.readFileSync(FILE_PATH, 'utf-8'));
-}
-
-module.exports = { saveRefreshToken, readRefreshTokens };
+module.exports = { saveRefreshToken, readRefreshTokens, removeRefreshToken };
