@@ -3,8 +3,12 @@ const jwt = require('jsonwebtoken');
 
 const generateAccessToken = require('../../utils/generate-access-token');
 
+const { removeRefreshToken, readRefreshTokens } = require('../../services/local-storage-tokens-service');
+
 const handleRefreshToken = (req, res) => {
     const refreshToken = req.body.token;
+
+    const refreshTokens = readRefreshTokens();
 
     if (refreshToken == null) return res.sendStatus(401);
 
@@ -18,7 +22,7 @@ const handleRefreshToken = (req, res) => {
         res.json({ accessToken });
     });
 
-    removeToken(refreshToken);
+    removeRefreshToken(refreshToken);
 }
 
 module.exports = { handleRefreshToken };
