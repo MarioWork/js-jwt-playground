@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const FILE_PATH = './services/refresh-tokens.json';
+const FILE_PATH = './data/refresh-tokens.json';
 
 const saveRefreshToken = (refreshToken) => {
     const refreshTokens = readRefreshTokens();
