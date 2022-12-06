@@ -6,11 +6,11 @@ const generateAccessToken = require('../../utils/generate-access-token');
 const { removeRefreshToken, readRefreshTokens } = require('../../services/local-storage-tokens-service');
 
 const handleRefreshToken = (req, res) => {
-    const refreshToken = req.body.token;
+    const refreshToken = req?.cookies?.jwt;
 
     const refreshTokens = readRefreshTokens();
 
-    if (refreshToken == null) return res.sendStatus(401);
+    if (!refreshToken) return res.sendStatus(401);
 
     if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403);
 
