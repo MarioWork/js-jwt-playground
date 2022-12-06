@@ -16,7 +16,10 @@ const handleLogin = (req, res) => {
 
     saveRefreshToken(refreshToken);
 
-    res.json({ accessToken, refreshToken });
+    res.cookie('jwt', refreshToken, {
+        httpOnly: true
+    });
+    res.json({ accessToken });
 }
 
 module.exports = { handleLogin };
