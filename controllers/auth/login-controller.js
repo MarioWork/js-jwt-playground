@@ -6,8 +6,6 @@ const generateAccessToken = require('../../utils/generate-access-token');
 const generateRefreshAccessToken = require('../../utils/generate-refresh-access-token');
 
 const handleLogin = (req, res) => {
-    //Authenticate User
-
     //Serialize user
     const username = req.body.username;
 
