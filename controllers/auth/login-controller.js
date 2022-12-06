@@ -11,6 +11,8 @@ const handleLogin = (req, res) => {
 
     const user = { name: username };
 
+    //should authenticate the user before
+
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshAccessToken(user);
 
