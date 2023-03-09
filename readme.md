@@ -1,4 +1,4 @@
-# JWT Tokken Rotation
+# JWT Token Rotation
 
 This project consists of a representation of the jwt authentication/authorization working in a proper manner, using cookies. Refresh tokens are being saved in a file to save complexity, since the project objective was to learn jwt authentication and authorization.
 
